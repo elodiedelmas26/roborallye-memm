@@ -16,8 +16,10 @@ public class ServeurClient {
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Sending request to Socket Server");
-            if(i==4)oos.writeObject("exit");
-            else oos.writeObject(""+i);
+            if(i==4)
+		oos.writeObject("exit");
+            else 
+		oos.writeObject(""+i);
             //read the server response message
             ois = new ObjectInputStream(socket.getInputStream());
             String message = (String) ois.readObject();
