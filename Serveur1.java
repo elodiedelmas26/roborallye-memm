@@ -1,5 +1,4 @@
-package RobotRallye;
-
+package code_serveur_client;
 import java.io.*;
 import java.net.Socket;
 import java.net.ServerSocket;
@@ -13,7 +12,7 @@ public class Serveur1{
 	    private static int port = 9876 ;
 	    
 	    public static void main(String args[]) throws IOException, ClassNotFoundException{
-	        server = new ServerSocket();
+	        server = new ServerSocket(9876);
 	        while(true){
 	            System.out.println("En attente de la requete du client :");
 	            Socket socket = server.accept();
@@ -26,6 +25,8 @@ public class Serveur1{
 	            oos.close();
 	            socket.close();
 	            if(message.equalsIgnoreCase("exit")) break;
+	            ServiceClient clientSock=new ServiceClient(server);
+	            new Thread(clientSock).start();
 	        }
 	        System.out.println("Arrêt du serveur !");
 	        server.close();
@@ -43,10 +44,10 @@ public class Serveur1{
 class ServiceClient extends Thread{
 	
 	final static int port=9876;
-	private Socket socket;
+	private ServerSocket clientSocket;
 	
-	public ServiceClient(Socket socketClient) {
-		// TODO Auto-generated constructor stub
+	public ServiceClient(ServerSocket server) {
+		this.setClientSocket(server);
 	}
 
 	public static void main(String[]args) {
@@ -54,32 +55,39 @@ class ServiceClient extends Thread{
 			try (ServerSocket server = new ServerSocket(port)) {
 				System.out.println("Lancement du serveur : ");
 				while(true) {
-					Socket socketClient=server.accept();
-					ServiceClient t=new ServiceClient(socketClient);
+					ServiceClient t=new ServiceClient(server);
 					t.start();
-				}
+				}  
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void run() {
-		traitement();
+	public void run(Socket server) {
+		traitement(server);
 	}
-	public void traitement() {
+	public void traitement(Socket server) {
 		try {
 			String msg="";
-			System.out.println("Connexion avec le client : "+socket.getInetAddress());
+			System.out.println("Connexion avec le client : "+server.getInetAddress());
 			
-			BufferedReader in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintStream out=new PrintStream(socket.getOutputStream());
+			BufferedReader in=new BufferedReader(new InputStreamReader(server.getInputStream()));
+			PrintStream out=new PrintStream(server.getOutputStream());
 			msg=in.readLine();
 			out.println("Bonjour "+msg);
-			socket.close();
+			server.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public ServerSocket getClientSocket() {
+		return clientSocket;
+	}
+
+	public void setClientSocket(ServerSocket clientSocket) {
+		this.clientSocket = clientSocket;
+	}
 }
+
