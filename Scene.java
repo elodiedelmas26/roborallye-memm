@@ -17,7 +17,7 @@ public class Scene extends JPanel{
 	//VARIABLE
 	private ImageIcon icoCaseGrise;
 	private Image imgCaseGrise;
-	//private final int LARGEUR_CASE_GRISE =10;
+	
 	
 	private ImageIcon icoDrapeau;
 	private Image imgDrapeau;
@@ -43,6 +43,9 @@ public class Scene extends JPanel{
 	
 	private ImageIcon icoTrou;
 	private Image imgTrou;
+	
+	private ImageIcon icoMario;
+	private Image imgMario;
 	
 	
 	//CONSTRUCTEUR
@@ -75,6 +78,10 @@ public class Scene extends JPanel{
 		
 		this.icoDrapeau = new ImageIcon(getClass().getResource("/images/drapeau.png"));
 		this.imgDrapeau = this.icoDrapeau.getImage();
+		
+		icoMario = new ImageIcon(getClass().getResource("/images/Mario.png"));
+		this.imgMario = this.icoMario.getImage();
+		
 		
 	
 	}
@@ -237,6 +244,8 @@ public class Scene extends JPanel{
 		g.drawImage(this.imgCaseGrise, 550, 450, null);
 		g.drawImage(this.imgCaseGrise, 550, 500, null);
 		g.drawImage(this.imgCaseGrise, 550, 550, null);
+		
+		g.drawImage(imgMario,0,0,null);
 		
 	}
 	

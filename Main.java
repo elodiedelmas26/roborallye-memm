@@ -31,11 +31,7 @@ public class Main {
 		fenetre.setContentPane(scene);
 		fenetre.setVisible(true);//fenetre visible
 		
-		JButton bouton1 = new JButton("Générer les cartes");
-		fenetre.getContentPane().add(bouton1);
-		fenetre.setVisible(true);
-		bouton1.setBounds(650, 50, 300, 50);
-
+		
 		JButton bouton2 = new JButton("START");
 		fenetre.getContentPane().add(bouton2);
 		fenetre.setVisible(true);
