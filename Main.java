@@ -32,10 +32,10 @@ public class Main {
 		fenetre.setVisible(true);//fenetre visible
 		
 		
-		JButton bouton2 = new JButton("START");
-		fenetre.getContentPane().add(bouton2);
+		JButton bouton = new JButton("START");
+		fenetre.getContentPane().add(bouton);
 		fenetre.setVisible(true);
-		bouton2.setBounds(650, 500, 300, 50);
+		bouton.setBounds(650, 500, 300, 50);
 		
 		
 		
@@ -43,3 +43,4 @@ public class Main {
 	}
 
 }
+	
