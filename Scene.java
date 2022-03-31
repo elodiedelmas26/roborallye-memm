@@ -245,7 +245,7 @@ public class Scene extends JPanel{
 		g.drawImage(this.imgCaseGrise, 550, 500, null);
 		g.drawImage(this.imgCaseGrise, 550, 550, null);
 		
-		g.drawImage(imgMario,0,0,null);
+		g.drawImage(imgMario,250,550,null);
 		
 	}
 	
