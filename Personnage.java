@@ -3,6 +3,7 @@ package jeu;
 import java.awt.Component;
 
 public class Personnage extends Thread {
+	private int largeur, hauteur;
 	public static final int DROITE=0;
 	public static final int GAUCHE = 1;
 	public static final int REPOS = 10;
@@ -113,6 +114,7 @@ public class Personnage extends Thread {
 		if (isAlive()) notify();
 		zone.repaint();
 	}
+	
 	
 
 
