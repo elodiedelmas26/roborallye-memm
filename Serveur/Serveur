@@ -1,0 +1,59 @@
+package code_serveur_client;
+import java.io.*;
+import java.net.Socket;
+import java.net.ServerSocket;
+
+public class Serveur1 implements Runnable{
+	private int port;
+	private ServerSocket serverSocket;
+	private boolean running = false;
+	private int id = 0;
+	
+	public Serveur1(int port) {
+		this.port = port;
+		
+		try {
+			serverSocket = new ServerSocket(port);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void start() {
+		new Thread(this).start();
+	}
+
+	@Override
+	public void run() {
+		running = true;
+		System.out.println("Server started on port: " + port);
+		
+		while(running) {
+			try {
+				Socket socket = serverSocket.accept();
+				initSocket(socket);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		shutdown();
+	}
+	
+	private void initSocket(Socket socket) {
+		Client1 connection = new Client1(socket,id);
+		Connexion.connections.put(id,connection);
+		new Thread(connection).start();
+		System.out.println("Client connecté");
+		id++;
+	}
+	
+	public void shutdown() {
+		running = false;
+		
+		try {
+			serverSocket.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
