@@ -55,7 +55,6 @@ public class Client1 implements Runnable{
 		try {
 			running = false;
 			in.close();
-			out.close();
 			socket.close();
 		}catch(IOException e) {
 			e.printStackTrace();
